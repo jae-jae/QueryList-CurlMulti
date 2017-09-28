@@ -24,7 +24,7 @@ class CurlMulti implements PluginContract
 
     public function __construct(QueryList $queryList,$urls)
     {
-        $this->urls = $urls;
+        $this->urls = is_string($urls)?[$urls]:$urls;
         $this->queryList = $queryList;
         $this->curl = new Core();
     }
