@@ -200,3 +200,18 @@ Array
     [1] => Resolving timed out after 1000 milliseconds
 )
 ```
+
+- Example-3
+```
+$ql->rules([
+    'title' => ['h3 a','text'],
+    'link' => ['h3 a','href']
+])->curlMulti()->add('https://github.com/trending/go')
+    ->success(function (QueryList $ql,CurlMulti $curl,$r){
+        echo "Current url:{$r['info']['url']} \r\n";
+        $data = $ql->query()->getData();
+        print_r($data->all());
+})->start()
+    ->add('https://github.com/trending/php')
+    ->start();
+```
