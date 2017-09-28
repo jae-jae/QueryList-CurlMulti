@@ -140,7 +140,7 @@ Array
 
 - Example-3
 
-```
+```php
 $ql->curlMulti([
     'https://github-error-host.com/trending/php',
     'https://github.com/trending/go'
@@ -202,7 +202,7 @@ Array
 ```
 
 - Example-3
-```
+```php
 $ql->rules([
     'title' => ['h3 a','text'],
     'link' => ['h3 a','href']
