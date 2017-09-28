@@ -3,6 +3,7 @@
  * Created by PhpStorm.
  * User: Jaeger <JaegerCode@gmail.com>
  * Date: 2017/9/27
+ * Curl multi threading
  */
 
 namespace QL\Ext;
@@ -38,9 +39,8 @@ class CurlMulti implements PluginContract
     public function success(Closure $callback)
     {
         $this->successCallback = function ($r) use($callback){
-           $newQueryList = clone $this->queryList;
-           $newQueryList->setHtml($r['body']);
-           $callback($newQueryList,$r);
+            $this->queryList->setHtml($r['body']);
+           $callback($this->queryList,$r);
         };
         return $this;
     }
