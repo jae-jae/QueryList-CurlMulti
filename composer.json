@@ -3,7 +3,7 @@
     "description": "QueryList Plugin: Curl multi threading. QueryList Curl多线程插件",
     "require": {
         "PHP":">=7.0",
-        "phpdr.net/php-curlmulti": "^3.0"
+        "ares333/php-curl": "^4.2"
     },
     "require-dev": {
         "jaeger/querylist": "dev-master"

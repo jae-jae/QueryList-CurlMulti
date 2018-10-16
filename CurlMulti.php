@@ -8,7 +8,7 @@
 
 namespace QL\Ext;
 
-use Ares333\CurlMulti\Core;
+use Ares333\Curl\Curl;
 use QL\Contracts\PluginContract;
 use QL\QueryList;
 use Closure;
@@ -26,7 +26,10 @@ class CurlMulti implements PluginContract
     {
         $this->urls = is_string($urls)?[$urls]:$urls;
         $this->queryList = $queryList;
-        $this->curl = new Core();
+        $this->curl = new Curl();
+        $this->curl->opt = [
+            CURLOPT_RETURNTRANSFER => true
+        ];
     }
 
 
@@ -85,7 +88,11 @@ class CurlMulti implements PluginContract
     protected function bindOpt($opt)
     {
         foreach ($opt as $key => $value) {
-            $this->curl->$key = $value;
+            if($key == 'opt'){
+                $this->curl->opt = $this->arrayMerge($this->curl->opt,$value);
+            }else {
+                $this->curl->$key = $value;
+            }
         }
     }
 
@@ -98,6 +105,14 @@ class CurlMulti implements PluginContract
                 )
             ],$this->successCallback);
         }
+    }
+
+    protected function arrayMerge($arr1,$arr2)
+    {
+        foreach ($arr2 as $key => $value) {
+            $arr1[$key] = $value;
+        }
+        return $arr1;
     }
 
 }
