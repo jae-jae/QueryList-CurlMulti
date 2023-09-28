@@ -103,7 +103,7 @@ class CurlMulti implements PluginContract
                 'opt' => array(
                     CURLOPT_URL => $url
                 )
-            ],$this->successCallback);
+            ],$this->successCallback,$this->curl->cbFail);
         }
     }
 
